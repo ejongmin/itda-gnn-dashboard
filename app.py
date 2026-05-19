@@ -795,7 +795,13 @@ elif "XAI" in page:
 
     if kf and "kfold" in kf:
         kdf = pd.DataFrame(kf["kfold"]).dropna(subset=["pr_auc"])
-        kdf["spam_pct"] = kdf["spam_ratio"] * 100
+        # spam_ratio 컬럼이 없으면 n_spam/n_total로 계산
+        if "spam_ratio" in kdf.columns:
+            kdf["spam_pct"] = kdf["spam_ratio"] * 100
+        elif "n_spam" in kdf.columns and "n_total" in kdf.columns:
+            kdf["spam_pct"] = kdf["n_spam"] / kdf["n_total"] * 100
+        else:
+            kdf["spam_pct"] = 0.0
 
         fig_k = make_subplots(specs=[[{"secondary_y":True}]])
         bar_ck = [C["success"] if v>=0.7 else (C["warn"] if v>=0.4 else C["danger"])
