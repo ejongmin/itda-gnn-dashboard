@@ -39,8 +39,9 @@ CHART = dict(
     font=dict(family="Inter, Noto Sans KR, sans-serif", color=C["text"], size=12),
     margin=dict(l=8, r=8, t=36, b=8),
     hoverlabel=dict(bgcolor=C["surf2"], font_color=C["text"], bordercolor=C["border"]),
-    legend=dict(bgcolor="rgba(0,0,0,0)", bordercolor=C["border"]),
 )
+# legend 기본값 (CHART와 분리 — 중복 키 TypeError 방지)
+LEGEND = dict(bgcolor="rgba(0,0,0,0)", bordercolor=C["border"])
 
 AXIS = dict(showgrid=True, gridcolor="rgba(255,255,255,0.05)",
             linecolor=C["border"], tickcolor=C["border"], tickfont_color=C["text2"])
@@ -278,7 +279,7 @@ if "개요" in page:
             fig.update_yaxes(title_text="엣지 수", secondary_y=False, **AXIS)
             fig.update_yaxes(title_text="XAI 기여도 (%)", secondary_y=True,
                              showgrid=False, tickcolor=C["border"], tickfont_color=C["text2"])
-            fig.update_layout(**CHART, height=280, legend=dict(orientation="h", y=1.12))
+            fig.update_layout(**CHART, height=280, legend={**LEGEND, "orientation":"h", "y":1.12})
             st.plotly_chart(fig, use_container_width=True)
 
         # 모델 발전 4단계 (가로 타임라인)
@@ -317,7 +318,7 @@ if "개요" in page:
             textfont_size=11, showlegend=True,
         ))
         fig_sp.update_layout(**CHART, height=170,
-                             legend=dict(orientation="h", y=-0.1),
+                             legend={**LEGEND, "orientation":"h", "y":-0.1},
                              annotations=[dict(text="클래스", x=0.5, y=0.5,
                                               showarrow=False, font_size=12,
                                               font_color=C["text"])])
@@ -708,7 +709,7 @@ elif "모델" in page:
         fig3.update_xaxes(**AXIS); fig3.update_yaxes(**AXIS, range=[0,1.05])
         fig3.update_layout(**CHART, height=300, barmode="group",
                            title="트랜스덕티브 vs 인덕티브 Gap 비교",
-                           legend=dict(orientation="h", y=1.1))
+                           legend={**LEGEND, "orientation":"h", "y":1.1})
         st.plotly_chart(fig3, use_container_width=True)
 
     with tab3:
@@ -828,7 +829,7 @@ elif "XAI" in page:
         fig_k.update_xaxes(**AXIS)
         fig_k.update_layout(**CHART, height=320,
                             title="시간 구간별 PR-AUC vs 스팸 밀도",
-                            legend=dict(orientation="h", y=1.1))
+                            legend={**LEGEND, "orientation":"h", "y":1.1})
         st.plotly_chart(fig_k, use_container_width=True)
 
         c_ins, c_sum = st.columns([2,1])
