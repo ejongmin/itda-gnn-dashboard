@@ -1,4 +1,4 @@
-"""
+﻿"""
 itda GNN 사기 탐지 대시보드
 학술대회 최적화 디자인 — F패턴 레이아웃 · 세마틱 색상 · 벤치마크 라인
 """
@@ -44,6 +44,11 @@ CHART = dict(
 
 AXIS = dict(showgrid=True, gridcolor="rgba(255,255,255,0.05)",
             linecolor=C["border"], tickcolor=C["border"], tickfont_color=C["text2"])
+
+# Python 3.10 f-string 호환용 색상 단축 변수
+cp=C["primary"]; cs=C["success"]; cw=C["warn"]; cd=C["danger"]
+cpu=C["purple"]; ct=C["teal"];    cbg=C["bg"];  csu=C["surf"]
+csu2=C["surf2"]; cbr=C["border"]; ctx=C["text"]; ctx2=C["text2"]; cmu=C["muted"]
 
 st.set_page_config(
     page_title="itda GNN | 리뷰 어뷰징 탐지",
@@ -248,7 +253,7 @@ if "개요" in page:
     col_l, col_r = st.columns([2, 1], gap="large")
 
     with col_l:
-        st.markdown(f"<div class='sec' style='--accent:{C[\"primary\"]};'>📐 5종 엣지 설계 — 기여도 & 규모</div>",
+        st.markdown(f"<div class='sec' style='--accent:{cp};'>📐 5종 엣지 설계 — 기여도 & 규모</div>",
                     unsafe_allow_html=True)
 
         if not attr.empty:
@@ -277,7 +282,7 @@ if "개요" in page:
             st.plotly_chart(fig, use_container_width=True)
 
         # 모델 발전 4단계 (가로 타임라인)
-        st.markdown(f"<div class='sec' style='--accent:{C[\"teal\"]};'>🚀 모델 발전 — 4단계 진화 경로</div>",
+        st.markdown(f"<div class='sec' style='--accent:{ct};'>🚀 모델 발전 — 4단계 진화 경로</div>",
                     unsafe_allow_html=True)
         stages = [
             ("Stage 1","정적 GNN",    "HeteroSAGE\nBWGNN",    "0.830", C["muted"]),
@@ -302,7 +307,7 @@ if "개요" in page:
                 </div>""", unsafe_allow_html=True)
 
     with col_r:
-        st.markdown(f"<div class='sec' style='--accent:{C[\"warn\"]};'>📊 데이터 분포</div>",
+        st.markdown(f"<div class='sec' style='--accent:{cw};'>📊 데이터 분포</div>",
                     unsafe_allow_html=True)
         # 클래스 비율
         fig_sp = go.Figure(go.Pie(
@@ -359,7 +364,7 @@ elif "탐지" in page:
     ctrl, result = st.columns([1, 2], gap="large")
 
     with ctrl:
-        st.markdown(f"<div class='sec' style='--accent:{C[\"primary\"]};'>🔧 노드 선택</div>",
+        st.markdown(f"<div class='sec' style='--accent:{cp};'>🔧 노드 선택</div>",
                     unsafe_allow_html=True)
         lf = st.selectbox("필터", ["전체","실제 스팸만","실제 정상만"], label_visibility="collapsed")
 
@@ -374,7 +379,7 @@ elif "탐지" in page:
             st.session_state["sel"] = int(nid)
 
         st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown(f"<div class='sec' style='--accent:{C[\"teal\"]};'>📈 Test Set 요약</div>",
+        st.markdown(f"<div class='sec' style='--accent:{ct};'>📈 Test Set 요약</div>",
                     unsafe_allow_html=True)
         tp = probs[tmask]
         st.markdown(f"""
@@ -444,7 +449,7 @@ elif "탐지" in page:
 
     if sel is not None:
         st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown(f"<div class='sec' style='--accent:{C[\"teal\"]};'>🔎 탐지 근거 — 노드 {sel}</div>",
+        st.markdown(f"<div class='sec' style='--accent:{ct};'>🔎 탐지 근거 — 노드 {sel}</div>",
                     unsafe_allow_html=True)
         nb  = np.where((bei[0]==sel)|(bei[1]==sel))[0]
         ns  = np.where((sei[0]==sel)|(sei[1]==sel))[0]
@@ -470,13 +475,13 @@ elif "탐지" in page:
         with dl:
             row = df.iloc[sel] if sel < len(df) else None
             if row is not None:
-                st.markdown(f"<div class='sec' style='--accent:{C[\"primary\"]};'>리뷰 텍스트</div>",
+                st.markdown(f"<div class='sec' style='--accent:{cp};'>리뷰 텍스트</div>",
                             unsafe_allow_html=True)
                 st.markdown(f"<div class='review-box'>{str(row.get('text',''))[:420]}</div>",
                             unsafe_allow_html=True)
 
         with dr:
-            st.markdown(f"<div class='sec' style='--accent:{C[\"teal\"]};'>신호 강도</div>",
+            st.markdown(f"<div class='sec' style='--accent:{ct};'>신호 강도</div>",
                         unsafe_allow_html=True)
             sig = [("R-U-R (20%)", len(nu), C["purple"]),
                    ("R-Burst-R (6%)", len(nb), C["teal"]),
@@ -526,7 +531,7 @@ elif "캠페인" in page:
     cl, cr = st.columns([3,2], gap="large")
 
     with cl:
-        st.markdown(f"<div class='sec' style='--accent:{C[\"danger\"]};'>🗂 의심 캠페인 목록</div>",
+        st.markdown(f"<div class='sec' style='--accent:{cd};'>🗂 의심 캠페인 목록</div>",
                     unsafe_allow_html=True)
         if not camps.empty:
             sp_col = "spam_ratio" if "spam_ratio" in camps.columns else camps.columns[2]
@@ -542,7 +547,7 @@ elif "캠페인" in page:
             )
 
     with cr:
-        st.markdown(f"<div class='sec' style='--accent:{C[\"warn\"]};'>📊 캠페인 크기 분포</div>",
+        st.markdown(f"<div class='sec' style='--accent:{cw};'>📊 캠페인 크기 분포</div>",
                     unsafe_allow_html=True)
         if not camps.empty and "n_nodes" in camps.columns:
             fig_h = go.Figure(go.Histogram(
@@ -582,7 +587,7 @@ elif "캠페인" in page:
 
     viz = RPT/"fraud_network_viz.html"
     if viz.exists():
-        st.markdown(f"<div class='sec' style='--accent:{C[\"teal\"]};'>🌐 사기 네트워크 시각화 — 🔴 스팸 · 🔵 정상</div>",
+        st.markdown(f"<div class='sec' style='--accent:{ct};'>🌐 사기 네트워크 시각화 — 🔴 스팸 · 🔵 정상</div>",
                     unsafe_allow_html=True)
         st.components.v1.html(open(viz,encoding="utf-8").read(), height=560)
 
@@ -602,7 +607,7 @@ elif "모델" in page:
     tab1, tab2, tab3 = st.tabs(["🏆 트랜스덕티브 성능", "🌍 인덕티브 (배포 환경)", "📈 학습 곡선"])
 
     with tab1:
-        st.markdown(f"<div class='sec' style='--accent:{C[\"primary\"]};'>PR-AUC 및 Macro F1 순위 (상위 14개)</div>",
+        st.markdown(f"<div class='sec' style='--accent:{cp};'>PR-AUC 및 Macro F1 순위 (상위 14개)</div>",
                     unsafe_allow_html=True)
 
         lf = log.sort_values("pr_auc", ascending=False).head(14)
@@ -638,14 +643,14 @@ elif "모델" in page:
           점선 = 목표 기준 0.85
         </div>""", unsafe_allow_html=True)
 
-        st.markdown(f"<div class='sec' style='--accent:{C[\"muted\"]};margin-top:20px;'>전체 실험 결과</div>",
+        st.markdown(f"<div class='sec' style='--accent:{cmu};margin-top:20px;'>전체 실험 결과</div>",
                     unsafe_allow_html=True)
         disp = log[["model","pr_auc","macro_f1","params","notes"]].copy()
         disp.columns = ["모델","PR-AUC","Macro-F1","파라미터","비고"]
         st.dataframe(disp, use_container_width=True, height=280)
 
     with tab2:
-        st.markdown(f"<div class='sec' style='--accent:{C[\"purple\"]};'>인덕티브 PR-AUC — Train→Test 엣지 완전 차단 후 평가</div>",
+        st.markdown(f"<div class='sec' style='--accent:{cpu};'>인덕티브 PR-AUC — Train→Test 엣지 완전 차단 후 평가</div>",
                     unsafe_allow_html=True)
         st.markdown("<span class='badge badge-amber'>⚠ 실제 배포 환경 시뮬레이션</span>",
                     unsafe_allow_html=True)
@@ -707,7 +712,7 @@ elif "모델" in page:
         st.plotly_chart(fig3, use_container_width=True)
 
     with tab3:
-        st.markdown(f"<div class='sec' style='--accent:{C[\"teal\"]};'>주요 모델 PR-AUC 학습 수렴 곡선</div>",
+        st.markdown(f"<div class='sec' style='--accent:{ct};'>주요 모델 PR-AUC 학습 수렴 곡선</div>",
                     unsafe_allow_html=True)
         st.info("학습 곡선 데이터는 로컬 환경에서만 제공됩니다.")
 
@@ -728,7 +733,7 @@ elif "XAI" in page:
         xa1, xa2 = st.columns([3,2], gap="large")
 
         with xa1:
-            st.markdown(f"<div class='sec' style='--accent:{C[\"purple\"]};'>엣지 제거 시 PR-AUC 하락 = 기여도</div>",
+            st.markdown(f"<div class='sec' style='--accent:{cpu};'>엣지 제거 시 PR-AUC 하락 = 기여도</div>",
                         unsafe_allow_html=True)
             a2 = attr.sort_values("contribution_pct", ascending=True)
             edge_c = [C["purple"] if v==a2["contribution_pct"].max() else
@@ -759,7 +764,7 @@ elif "XAI" in page:
             )
 
         with xa2:
-            st.markdown(f"<div class='sec' style='--accent:{C[\"purple\"]};'>기여도 구성 비율</div>",
+            st.markdown(f"<div class='sec' style='--accent:{cpu};'>기여도 구성 비율</div>",
                         unsafe_allow_html=True)
             ec = [C["purple"],C["teal"],C["primary"],C["warn"],C["muted"]]
             fig_d = go.Figure(go.Pie(
@@ -784,7 +789,7 @@ elif "XAI" in page:
 
     # 어뷰저 진화 분석
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown(f"<div class='sec' style='--accent:{C[\"warn\"]};'>⏳ 어뷰저 전략 진화 — K-Fold 시간 분할 분석</div>",
+    st.markdown(f"<div class='sec' style='--accent:{cw};'>⏳ 어뷰저 전략 진화 — K-Fold 시간 분할 분석</div>",
                 unsafe_allow_html=True)
 
     if kf and "kfold" in kf:
@@ -844,3 +849,4 @@ elif "XAI" in page:
                   <div class='kpi-val' style='color:{C["purple"]};'>{sm.get("mean_pr_auc","—")}</div>
                   <div class='kpi-sub'>std = {sm.get("std_pr_auc","—")}</div>
                 </div>""", unsafe_allow_html=True)
+
