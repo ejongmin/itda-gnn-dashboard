@@ -1,0 +1,63 @@
+{
+  "model": "DRAGWave_TVF_400ep",
+  "baseline_inductive": {
+    "pr_auc": 0.7429,
+    "macro_f1": 0.8027,
+    "n_spam": 793,
+    "n_total": 6000
+  },
+  "kfold": [
+    {
+      "fold": 1,
+      "ts_lo": 1310688000.0,
+      "ts_hi": 1380067200.0,
+      "pr_auc": 0.9358,
+      "macro_f1": 0.8975,
+      "n_spam": 353,
+      "n_total": 1200
+    },
+    {
+      "fold": 2,
+      "ts_lo": 1380067200.0,
+      "ts_hi": 1390694400.0,
+      "pr_auc": 0.3574,
+      "macro_f1": 0.6714,
+      "n_spam": 80,
+      "n_total": 1200
+    },
+    {
+      "fold": 3,
+      "ts_lo": 1390694400.0,
+      "ts_hi": 1400803200.0,
+      "pr_auc": 0.5315,
+      "macro_f1": 0.7389,
+      "n_spam": 116,
+      "n_total": 1200
+    },
+    {
+      "fold": 4,
+      "ts_lo": 1400803200.0,
+      "ts_hi": 1410566400.0,
+      "pr_auc": 0.3379,
+      "macro_f1": 0.6531,
+      "n_spam": 101,
+      "n_total": 1200
+    },
+    {
+      "fold": 5,
+      "ts_lo": 1410566400.0,
+      "ts_hi": 1420761600.0,
+      "pr_auc": 0.5304,
+      "macro_f1": 0.7215,
+      "n_spam": 143,
+      "n_total": 1200
+    }
+  ],
+  "summary": {
+    "k": 5,
+    "mean_pr_auc": 0.5386,
+    "std_pr_auc": 0.2149,
+    "mean_f1": 0.7365,
+    "std_f1": 0.0864
+  }
+}

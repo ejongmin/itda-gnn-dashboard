@@ -1,0 +1,7 @@
+model,pr_auc,macro_f1,params,train_sec,notes
+HeteroSAGE,0.618,0.726,321537,617.4,test-only 엣지 마스킹 (인덕티브)
+HeteroGAT,0.3617,0.6004,192513,687.5,test-only 엣지 마스킹 (인덕티브)
+HeteroBWGNN,0.6074,0.7275,321537,537.5,test-only 엣지 마스킹 (인덕티브)
+TGATLite,0.4978,0.6643,314145,670.2,test-only 엣지 마스킹 (인덕티브)
+BWGNN_boost,0.6526,0.7515,387329,0.0,부스트 그래프 test-only 인덕티브
+Ensemble_BWGNN_TGAT,0.657,0.7178,0,0.0,"앙상블 인덕티브(BWGNN_boost×0.6+TGATLite×0.4, test-only)"

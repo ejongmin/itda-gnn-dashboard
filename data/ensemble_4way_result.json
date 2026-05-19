@@ -1,0 +1,35 @@
+{
+  "n_models": 4,
+  "models": [
+    "DRAGWave_TVF_400ep",
+    "DRAGWave_NoRSR",
+    "HeteroBWGNN_boost",
+    "BWGAT"
+  ],
+  "best_weights": [
+    0.5,
+    0.3,
+    0.1,
+    0.1
+  ],
+  "inductive_pr_auc": 0.7748,
+  "inductive_macro_f1": 0.8158,
+  "individual_scores": {
+    "DRAGWave_TVF_400ep": {
+      "pr_auc": 0.7429,
+      "macro_f1": 0.8027
+    },
+    "DRAGWave_NoRSR": {
+      "pr_auc": 0.7234,
+      "macro_f1": 0.7939
+    },
+    "HeteroBWGNN_boost": {
+      "pr_auc": 0.6526,
+      "macro_f1": 0.7515
+    },
+    "BWGAT": {
+      "pr_auc": 0.678,
+      "macro_f1": 0.77
+    }
+  }
+}

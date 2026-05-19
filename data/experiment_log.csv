@@ -1,0 +1,35 @@
+model,pr_auc,macro_f1,params,train_sec,notes
+HeteroSAGE,0.8052,0.8103,321537,617.4,"stratified split, no tag, random_state=42"
+HeteroGAT,0.7082,0.7418,192513,687.5,"stratified split, no tag, random_state=42"
+HeteroBWGNN,0.83,0.8393,321537,537.5,"stratified split, no tag, random_state=42"
+TGATLite,0.7375,0.7863,314145,670.2,"stratified split, no tag, random_state=42"
+TGATLite_LogBochner,0.7353,0.7709,314145,676.9,"Log-Bochner 단독 ablation: log(1+Δt) 인코딩, 경로 미분리"
+TGATLiteV2,0.7339,0.7803,322337,807.0,Tri-Path(User+Product+Burst) + Log-Bochner: Dual Memory 일반화
+BWGAT,0.8503,0.8457,555009,2103.1,
+DRAG,0.7984,0.829,429057,1078.1,
+DRAGWave,0.8368,0.8482,596737,1040.4,
+BWGNN_TVF,0.8166,0.8122,0,0.0,TVF(+8차원) | 인덕티브: 0.6242
+TGATLiteV2_400ep,0.8822,0.8821,0,0.0,400 epoch 완전 수렴 — Dual Memory 기여 입증
+DRAG_400ep,0.9291,0.9333,429057,1495.0,DRAG 400 epoch 완전 수렴 — 관계 Attention 자동 학습
+Ensemble_DRAG_BWGNN,0.9319,0.9325,0,0.0,DRAG_400ep×0.7 + BWGNN_boost×0.3
+DRAGWave_400ep,0.934,0.9331,596737,2200.0,DRAG×BWGAT 융합 400ep — train=0.9999 gap=0.0659
+DRAGWave_Base,0.9286,0.929,596737,2146.3,과적합해소실험 gap=+0.0706 ⚠️ 경계
+DRAGWave_DropEdge20,0.9254,0.9239,596737,1921.3,과적합해소실험 gap=+0.0733 ⚠️ 경계
+DRAGWave_StrongReg,0.921,0.9271,596737,1622.8,과적합해소실험 gap=+0.0740 ⚠️ 경계
+DRAGWave_AllRegul,0.9156,0.9185,596737,1523.5,과적합해소실험 gap=+0.0769 ⚠️ 경계
+HeteroBWGNN_400ep,0.9288,0.9313,387329,0.0,400ep 공정비교 gap=+0.0712
+BWGAT_400ep,0.928,0.9276,555009,0.0,400ep 공정비교 gap=+0.0720
+Ensemble_XAI_Weighted,0.9367,0.9362,0,0.0,DW×0.7+BW×0.3 (XAI 관계 가중 — H4 가설 검증)
+DRAGWave_TVF,0.9165,0.9092,0,0.0,신규 가설 gap=+0.0788
+BWGNN_NoRSR,0.925,0.9177,0,0.0,신규 가설 gap=+0.0749
+BWGNN_SimR_80,0.8956,0.8922,0,0.0,신규 가설 gap=+0.0975
+BWGNN_SimR_90,0.9109,0.9048,0,0.0,신규 가설 gap=+0.0868
+Amazon_Base,0.8688,0.8808,0,1046.0,Amazon Fraud 기본 엣지 (11944노드 6.9% 스팸)
+Amazon_RSimR,0.8905,0.9057,0,1886.0,Amazon + R-Sim-R (threshold=0.70)
+YelpChi_5K,0.6271,0.269,0,28.0,YelpChi 5K 샘플 기본엣지
+DRAGWave_NoRSR,0.9359,0.9368,497409,0.0,발전방향 inductive=0.7234
+DRAGWave_TVF_400ep,0.928,0.9319,597761,0.0,발전방향 inductive=0.7429
+Elliptic_5K,0.514,0.5688,0,5.0,Bitcoin 거래 이상 탐지
+T-Finance_10K,0.4498,0.6057,0,30.0,T-Finance 10K샘플 스팸4.6%
+Ensemble_3way_0.9419,0.9419,0.9386,0,0.0,NoRSR×0.5+BWGNN×0.15+DW400×0.35
+T-Social_10K,0.1722,0.5904,0,13.0,소셜 네트워크 5.8M중 10K샘플

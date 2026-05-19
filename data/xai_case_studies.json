@@ -1,0 +1,92 @@
+[
+  {
+    "node_id": 103,
+    "fraud_prob": 0.9997,
+    "burst_edges": 0,
+    "sim_edges": 0,
+    "avg_burst_dt_h": -1.0,
+    "rating": 1.0,
+    "text_preview": "they used to sooo good i went to 3 days ago in a long time it was awful! no ener..."
+  },
+  {
+    "node_id": 59,
+    "fraud_prob": 0.9994,
+    "burst_edges": 0,
+    "sim_edges": 0,
+    "avg_burst_dt_h": -1.0,
+    "rating": 3.0,
+    "text_preview": "good food and atmosphere. but too crowded and unfriendly service. at least i got..."
+  },
+  {
+    "node_id": 233,
+    "fraud_prob": 0.9993,
+    "burst_edges": 0,
+    "sim_edges": 0,
+    "avg_burst_dt_h": -1.0,
+    "rating": 4.0,
+    "text_preview": "This place has such a great brunch menu.  Pick one of the plates named after you..."
+  },
+  {
+    "node_id": 30,
+    "fraud_prob": 0.9993,
+    "burst_edges": 0,
+    "sim_edges": 0,
+    "avg_burst_dt_h": -1.0,
+    "rating": 4.0,
+    "text_preview": "LOVE their coffee.  I get coffee here all the time.  Iced, hot, doesn't matter i..."
+  },
+  {
+    "node_id": 75,
+    "fraud_prob": 0.9993,
+    "burst_edges": 0,
+    "sim_edges": 0,
+    "avg_burst_dt_h": -1.0,
+    "rating": 3.0,
+    "text_preview": "Good; touristy though..."
+  },
+  {
+    "node_id": 203,
+    "fraud_prob": 0.9993,
+    "burst_edges": 0,
+    "sim_edges": 0,
+    "avg_burst_dt_h": -1.0,
+    "rating": 5.0,
+    "text_preview": "Order the Roasted Bone Marrow, Black Label Burger have it cooked as per the chef..."
+  },
+  {
+    "node_id": 31,
+    "fraud_prob": 0.9993,
+    "burst_edges": 0,
+    "sim_edges": 0,
+    "avg_burst_dt_h": -1.0,
+    "rating": 5.0,
+    "text_preview": "Delicious, reasonable, traditional.  Don't be turned off by the frantic atmosphe..."
+  },
+  {
+    "node_id": 107,
+    "fraud_prob": 0.9991,
+    "burst_edges": 0,
+    "sim_edges": 0,
+    "avg_burst_dt_h": -1.0,
+    "rating": 5.0,
+    "text_preview": "Great brunch place.  They've got a great space, excellent service and amazing fo..."
+  },
+  {
+    "node_id": 8,
+    "fraud_prob": 0.9991,
+    "burst_edges": 0,
+    "sim_edges": 0,
+    "avg_burst_dt_h": -1.0,
+    "rating": 5.0,
+    "text_preview": "My favorite gourmet spot, great beer selection too, for such an upscale place. A..."
+  },
+  {
+    "node_id": 539,
+    "fraud_prob": 0.9991,
+    "burst_edges": 0,
+    "sim_edges": 0,
+    "avg_burst_dt_h": -1.0,
+    "rating": 5.0,
+    "text_preview": "Great place, very noisy though. Make your reservation in advance. People were wa..."
+  }
+]

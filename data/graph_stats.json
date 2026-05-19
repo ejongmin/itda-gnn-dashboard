@@ -1,0 +1,12 @@
+{
+  "nodes": 30000,
+  "feat_dim": 386,
+  "edges_rtr": 464798,
+  "edges_rsr": 317408,
+  "edges_burst": 113548,
+  "edges_rur": 62968,
+  "total_edges": 958722,
+  "train_nodes": 24000,
+  "test_nodes": 6000,
+  "spam_ratio": 0.1322
+}
