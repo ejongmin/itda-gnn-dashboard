@@ -704,7 +704,7 @@ elif "모델" in page:
         <div style='background:{C["surf"]};border-radius:8px;padding:12px 14px;
                     border-left:3px solid {C["warn"]};font-size:12px;line-height:1.8;'>
           <b style='color:{C["warn"]}'>⚠ 앙상블 구분 안내</b><br>
-          • <b>3-way Ensemble</b>: Trans 0.9419 / F1 0.9386 — NoRSR×0.5 + BWGNN×0.15 + TVF×0.35<br>
+          • <b>3-way Ensemble</b>: Trans 0.9419 / F1 0.9386 / Ind 0.7675 — NoRSR×0.5 + BWGNN×0.15 + TVF×0.35<br>
           • <b>4-way Ensemble ★</b>: Trans <b>0.9418</b> / F1 <b>0.9400</b> / Ind <b>0.7748</b> — TVF×0.5 + NoRSR×0.3 + BWGNN×0.1 + BWGAT×0.1<br>
           4-way는 인덕티브 최적화로 설계했으나 <b>트랜스덕티브도 3-way와 동등</b> → 사실상 모든 지표에서 최강
         </div>""", unsafe_allow_html=True)
