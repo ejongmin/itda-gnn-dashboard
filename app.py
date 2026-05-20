@@ -697,8 +697,17 @@ elif "모델" in page:
         fig2.update_xaxes(range=[0, 1.12], **AXIS)
         fig2.update_yaxes(**AXIS)
         fig2.update_layout(**CHART, height=max(360, len(li)*24+80),
-                           title="인덕티브 PR-AUC — 논문 수준 베이스라인 포함")
+                           title="인덕티브 PR-AUC — 논문 수준 베이스라인 포함 (4-way Ensemble이 인덕티브 최고)")
         st.plotly_chart(fig2, use_container_width=True)
+
+        st.markdown(f"""
+        <div style='background:{C["surf"]};border-radius:8px;padding:12px 14px;
+                    border-left:3px solid {C["warn"]};font-size:12px;line-height:1.8;'>
+          <b style='color:{C["warn"]}'>⚠ 앙상블 구분 안내</b><br>
+          • <b>3-way Ensemble</b> (Trans 0.9419): 트랜스덕티브 최적화 — NoRSR×0.5 + BWGNN×0.15 + TVF×0.35<br>
+          • <b>4-way Ensemble</b> (Ind 0.7748): 인덕티브 최적화 — TVF×0.5 + NoRSR×0.3 + BWGNN×0.1 + BWGAT×0.1<br>
+          두 앙상블은 목적이 다른 <b>별개의 모델</b>입니다.
+        </div>""", unsafe_allow_html=True)
 
         st.markdown(f"""
         <div class='insight' style='--accent:{C["success"]};'>
