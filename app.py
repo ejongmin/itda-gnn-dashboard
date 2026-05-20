@@ -721,7 +721,7 @@ elif "모델" in page:
             "DRAG_400ep":        "history_DRAG_400ep.csv",
             "TGATLite_boost":    "history_TGATLite_boost.csv",
         }
-        curve_colors = [C["primary"], C["teal"], C["purple"], C["amber"]]
+        curve_colors = [C["primary"], C["teal"], C["purple"], C["warn"]]
         fig_cv = go.Figure()
         loaded = 0
         for (name, fname), color in zip(hist_files.items(), curve_colors):
