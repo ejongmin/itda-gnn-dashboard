@@ -1,12 +1,15 @@
 model,pr_auc,macro_f1,params,train_sec,notes
-HeteroSAGE,0.618,0.726,321537,617.4,test-only 엣지 마스킹 (인덕티브)
-HeteroGAT,0.3617,0.6004,192513,687.5,test-only 엣지 마스킹 (인덕티브)
-HeteroBWGNN,0.6074,0.7275,321537,537.5,test-only 엣지 마스킹 (인덕티브)
-TGATLite,0.4978,0.6643,314145,670.2,test-only 엣지 마스킹 (인덕티브)
-BWGNN_boost,0.6526,0.7515,387329,0.0,부스트 그래프 test-only 인덕티브
-Ensemble_BWGNN_TGAT,0.657,0.7178,0,0.0,"앙상블 인덕티브(BWGNN_boost×0.6+TGATLite×0.4, test-only)"
-DRAGWave_TVF_400ep,0.7429,0.8027,0,,인덕티브 평가
-DRAGWave_NoRSR,0.7234,0.7939,0,,인덕티브 평가
-HeteroBWGNN_boost,0.6526,0.7515,0,,인덕티브 평가
-BWGAT,0.678,0.77,0,,인덕티브 평가
-4-way Ensemble,0.7748,0.8158,0,,본선 최고 인덕티브
+HeteroSAGE,0.618,0.726,321537.0,617.4,test-only 엣지 마스킹 (인덕티브)
+HeteroGAT,0.3617,0.6004,192513.0,687.5,test-only 엣지 마스킹 (인덕티브)
+HeteroBWGNN,0.6074,0.7275,321537.0,537.5,test-only 엣지 마스킹 (인덕티브)
+TGATLite,0.4978,0.6643,314145.0,670.2,test-only 엣지 마스킹 (인덕티브)
+BWGNN_boost,0.6526,0.7515,387329.0,0.0,부스트 그래프 test-only 인덕티브
+Ensemble_BWGNN_TGAT,0.657,0.7178,0.0,0.0,"앙상블 인덕티브(BWGNN_boost×0.6+TGATLite×0.4, test-only)"
+DRAGWave_TVF_400ep,0.7429,0.8027,0.0,,인덕티브 평가
+DRAGWave_NoRSR,0.7234,0.7939,0.0,,인덕티브 평가
+HeteroBWGNN_boost,0.6526,0.7515,0.0,,인덕티브 평가
+BWGAT,0.678,0.77,0.0,,인덕티브 평가
+4-way Ensemble,0.7748,0.8158,0.0,,본선 최고 인덕티브
+DRAG_400ep,0.7312,0.8051,,,실측 인덕티브
+DRAGWave_400ep,0.7302,0.8031,,,실측 인덕티브
+3-way Ensemble,0.7675,0.8104,,,실측 인덕티브 (NoRSR×0.5+BWGNN×0.15+TVF×0.35)
