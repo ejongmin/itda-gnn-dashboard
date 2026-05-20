@@ -692,12 +692,12 @@ elif "모델" in page:
                            title="인덕티브 PR-AUC (배포 환경 기준)")
         st.plotly_chart(fig2, use_container_width=True)
 
-        # Gap 비교
+        # Gap 비교 — log와 logi 모두에서 공통 모델만
         merged = pd.merge(
             log[["model","pr_auc"]].rename(columns={"pr_auc":"transductive"}),
             logi[["model","pr_auc"]].rename(columns={"pr_auc":"inductive"}),
             on="model", how="inner"
-        ).sort_values("transductive", ascending=False).head(8)
+        ).sort_values("inductive", ascending=False).head(10)
 
         fig3 = go.Figure([
             go.Bar(name="트랜스덕티브", x=merged["model"], y=merged["transductive"],
@@ -715,7 +715,39 @@ elif "모델" in page:
     with tab3:
         st.markdown(f"<div class='sec' style='--accent:{ct};'>주요 모델 PR-AUC 학습 수렴 곡선</div>",
                     unsafe_allow_html=True)
-        st.info("학습 곡선 데이터는 로컬 환경에서만 제공됩니다.")
+        hist_files = {
+            "HeteroBWGNN_boost": "history_HeteroBWGNN_boost.csv",
+            "DRAGWave_400ep":    "history_DRAGWave_400ep.csv",
+            "DRAG_400ep":        "history_DRAG_400ep.csv",
+            "TGATLite_boost":    "history_TGATLite_boost.csv",
+        }
+        curve_colors = [C["primary"], C["teal"], C["purple"], C["amber"]]
+        fig_cv = go.Figure()
+        loaded = 0
+        for (name, fname), color in zip(hist_files.items(), curve_colors):
+            hp = DATA / fname
+            if hp.exists():
+                hdf = pd.read_csv(hp)
+                col_y = next((c for c in hdf.columns if "PR" in c or "pr" in c), hdf.columns[1])
+                col_x = next((c for c in hdf.columns if "epoch" in c.lower()), hdf.columns[0])
+                fig_cv.add_trace(go.Scatter(
+                    x=hdf[col_x], y=hdf[col_y],
+                    mode="lines", name=name,
+                    line=dict(color=color, width=2),
+                ))
+                loaded += 1
+        if loaded > 0:
+            fig_cv.add_hline(y=0.90, line_dash="dot", line_color=C["warn"],
+                             annotation_text="0.90 기준선")
+            fig_cv.update_xaxes(**AXIS, title_text="Epoch")
+            fig_cv.update_yaxes(**AXIS, title_text="PR-AUC", range=[0.1, 1.05])
+            fig_cv.update_layout(**CHART, height=360,
+                                 title="학습 곡선 — Test PR-AUC per Epoch",
+                                 legend={**LEGEND, "orientation":"h", "y":1.1})
+            st.plotly_chart(fig_cv, use_container_width=True)
+            st.caption("ep=1에서 낮게 시작해 단조 수렴 — 정상적인 S-curve 패턴")
+        else:
+            st.info("학습 곡선 데이터를 불러올 수 없습니다.")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
