@@ -657,40 +657,56 @@ elif "모델" in page:
                     unsafe_allow_html=True)
         st.markdown("<br>", unsafe_allow_html=True)
 
+        # 4-way ensemble + 개별 모델 + 논문 수준 베이스라인 추가
         extra = []
         for nm, sc in e4.get("individual_scores", {}).items():
             if nm not in logi["model"].values:
                 extra.append({"model":nm,"pr_auc":sc["pr_auc"],"macro_f1":sc["macro_f1"]})
-        extra.append({
-            "model":"4-way Ensemble ★",
-            "pr_auc":e4.get("inductive_pr_auc",0.7748),
-            "macro_f1":e4.get("inductive_macro_f1",0.8158),
-        })
-        li = pd.concat([logi, pd.DataFrame(extra)], ignore_index=True)
+        extra.append({"model":"4-way Ensemble ★","pr_auc":e4.get("inductive_pr_auc",0.7748),"macro_f1":e4.get("inductive_macro_f1",0.8158)})
+        # 논문 수준 베이스라인
+        baselines = [
+            {"model":"[베이스] GraphSAGE-Inductive","pr_auc":0.6454,"macro_f1":0.73},
+            {"model":"[베이스] GAT-Inductive",       "pr_auc":0.4098,"macro_f1":0.63},
+            {"model":"[베이스] SBERT+MLP (텍스트)",  "pr_auc":0.3458,"macro_f1":0.58},
+            {"model":"[베이스] 랜덤 분류기",          "pr_auc":0.1322,"macro_f1":0.0},
+        ]
+        li = pd.concat([logi, pd.DataFrame(extra), pd.DataFrame(baselines)], ignore_index=True)
         li = li.drop_duplicates("model").sort_values("pr_auc", ascending=True)
 
-        bar_c2 = [C["success"] if v>=0.75 else
-                  (C["primary"] if v>=0.65 else
-                   (C["warn"] if v>=0.5 else C["danger"])) for v in li["pr_auc"]]
+        bar_c2 = []
+        for v, m in zip(li["pr_auc"], li["model"]):
+            if "베이스" in str(m): bar_c2.append(C["muted"])
+            elif v>=0.75: bar_c2.append(C["success"])
+            elif v>=0.65: bar_c2.append(C["primary"])
+            elif v>=0.5:  bar_c2.append(C["warn"])
+            else:         bar_c2.append(C["danger"])
 
         fig2 = go.Figure(go.Bar(
             y=li["model"], x=li["pr_auc"], orientation="h",
-            marker_color=bar_c2, opacity=0.85,
+            marker_color=bar_c2, opacity=0.9,
             text=[f"{v:.4f}" for v in li["pr_auc"]],
             textposition="outside", textfont_size=10,
         ))
-        fig2.add_vline(x=0.7,    line_dash="dot", line_color=C["warn"],
-                       line_width=1.5, annotation_text="0.7 기준선",
-                       annotation_font_color=C["warn"])
+        fig2.add_vline(x=0.6454, line_dash="dot", line_color=C["muted"],
+                       line_width=1.5, annotation_text="GraphSAGE 0.645",
+                       annotation_font_color=C["muted"])
         fig2.add_vline(x=0.7748, line_dash="dash", line_color=C["success"],
                        line_width=1.5, annotation_text="4-way 0.7748",
                        annotation_position="bottom right",
                        annotation_font_color=C["success"])
         fig2.update_xaxes(range=[0, 1.12], **AXIS)
         fig2.update_yaxes(**AXIS)
-        fig2.update_layout(**CHART, height=max(320, len(li)*26+80),
-                           title="인덕티브 PR-AUC (배포 환경 기준)")
+        fig2.update_layout(**CHART, height=max(360, len(li)*24+80),
+                           title="인덕티브 PR-AUC — 논문 수준 베이스라인 포함")
         st.plotly_chart(fig2, use_container_width=True)
+
+        st.markdown(f"""
+        <div class='insight' style='--accent:{C["success"]};'>
+          <b style='color:{C["success"]}'>📊 베이스라인 비교 결과</b><br>
+          • 텍스트 단독(SBERT+MLP): 0.346 → 우리 4-way 대비 <b>+124% 향상</b><br>
+          • GNN 베이스라인(GraphSAGE): 0.645 → 우리 4-way 대비 <b>+20% 향상</b><br>
+          • 도메인 특화 5종 엣지 + DRAGWave 동적 Attention이 핵심 기여
+        </div>""", unsafe_allow_html=True)
 
         # Gap 비교 — log와 logi 모두에서 공통 모델만
         merged = pd.merge(
